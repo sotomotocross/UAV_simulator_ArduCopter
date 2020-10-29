@@ -11,6 +11,7 @@ UAV simulator featuring ArduCopter and MAVROS integration
 
 
 ## Introduction
+This Github repo features a UAV simulator 
 
 
 ## Packages explanation
