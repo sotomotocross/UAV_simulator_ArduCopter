@@ -23,6 +23,7 @@ The following plugin is a pure Gazebo plugin, so ROS is not needed to use it. Yo
 The current package is a combination of the basic ardupilot_gazebo packages:
 1. https://github.com/khancyr/ardupilot_gazebo
 2. https://github.com/SwiftGust/ardupilot_gazebo
+
 with some new and modified models according to the simulator's use.
 
 
