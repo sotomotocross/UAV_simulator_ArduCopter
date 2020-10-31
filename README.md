@@ -6,6 +6,7 @@ UAV simulator featuring ArduCopter and MAVROS integration
 * [Introduction](#introduction)
 * [Packages explanation](#packages_explanation)
 * [Install](#install)
+* [Demanding script changes](#demanding_script_changes)
 * [Usage](#usage)
 
 
@@ -94,6 +95,24 @@ Install is complete
 
 Now launch a world file with a copter/rover/plane and ardupilot plugin, and it should work!
 
+## Demanding script changes
+
+### First
+File: iris_coastline.launch
+Inside the iris_coastline package.
+In the line 86 you change the path of the model.sdf launched inside the script
+```
+<arg name="sdf_robot_file" default="/home/$USER/ardupilot_gazebo/models/iris_with_ardupilot_and_zed_stereocamera/model.sdf" />
+```
+
+### Second
+File spawn_drone.launch
+Inside the iris_gazebo package.
+In the line 13 change the path for the model.sdf file launched inside the script.
+```
+<arg name="sdf_robot_file" default="/home/sotiris/ardupilot_gazebo/models/iris_with_lidar/model.sdf" /> 
+```
+
 ## Usage
 
 ### Initial launch of the world
@@ -140,30 +159,36 @@ $ cd ~/csl_uav_simulator_ws
 $ source devel/setup.bash
 $ roslaunch iris_gazebo iris_empty_world.launch
 ```
-open a second terminal and run sitl
+open a second terminal and spawn the quadcopter equipped with a Hokuyo Lidar:
+```
+$ cd ~/csl_uav_simulator_ws
+$ source devel/setup.bash
+$ roslaunch iris_gazebo spawn_drone.launch
+```
+open a third terminal and run sitl
 ```
 $ cd ~/ardupilot/ArduCopter
 $ ../Tools/autotest/sim_vehicle.py --map --console
 ```
-open a third terminal and launch mavros:
+open a fourth terminal and launch mavros:
 ```
 $ cd ~/csl_uav_simulator_ws
 $ source devel/setup.bash
 $ roslaunch mavros apm.launch
 ```
-open a fourth terminal and launch the move_base package:
+open a fifth terminal and launch the move_base package:
 ```
 $ cd ~/csl_uav_simulator_ws
 $ source devel/setup.bash
 $ roslaunch iris_navigation move_base.launch
 ```
-open a fifth terminal and begin navigation:
+open a sixth terminal and begin navigation:
 ```
 $ cd ~/csl_uav_simulator_ws
 $ source devel/setup.bash
 $ rosrun iris_navigations cmd_vel_to_mavros.py
 ```
-open a sixth terminal to run rviz and visualize the navigation of the quadcopter:
+open a seventh terminal to run rviz and visualize the navigation of the quadcopter:
 ```
 $ rosrun rviz rviz
 ```
