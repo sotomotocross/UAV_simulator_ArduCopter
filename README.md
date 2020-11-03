@@ -63,6 +63,7 @@ $ git clone https://github.com/sotomotocross/csl_uav_simulator.git
 ```
 Move the ardupilot_gazebo package to the home directory and build it there (cross-check with the Using Gazebo Simulator with SITL documentation given above):
 ```
+$ cd csl_uav_simulator/
 $ mv ardupilot_gazebo/ /home/$USER/
 $ cd ~/adupilot_gazebo/
 $ mkdir build
@@ -125,7 +126,7 @@ Open a second terminal and launch SITL through the scripts file in the repo:
 ```
 $ cd ~/csl_uav_simulator_ws
 $ source devel/setup.bash
-$ cd src/scripts
+$ cd src/csl_uav_simulator/scripts
 $ ./startsitl.sh
 ```
 Open a third terminal and launch mavros:
