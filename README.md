@@ -118,21 +118,17 @@ In the line 13 change the path for the model.sdf file launched inside the script
 
 ### Initial launch of the world
 ```
-$ cd ~/csl_uav_simulator_ws
-$ source devel/setup.bash
-$ roslaunch iris_coastline iris_coastline.launch
+$ cd ~/csl_uav_simulator_ws/src/csl_uav_simulator/scripts
+$ ./startgz.sh
 ```
 Open a second terminal and launch SITL through the scripts file in the repo:
 ```
-$ cd ~/csl_uav_simulator_ws
-$ source devel/setup.bash
-$ cd src/csl_uav_simulator/scripts
+$ cd ~/csl_uav_simulator_ws/src/csl_uav_simulator/scripts
 $ ./startsitl.sh
 ```
 Open a third terminal and launch mavros:
 ```
-$ cd ~/csl_uav_simulator_ws
-$ source devel/setup.bash
+$ cd ~/csl_uav_simulator_ws/src/csl_uav_simulator/scripts
 $ roslaunch mavros apm.launch
 ```
 These three terminals launch the sandislad world with the iris quadcopter, the SITL (both communication, telemetry, console and map) and the mavros communcations.
