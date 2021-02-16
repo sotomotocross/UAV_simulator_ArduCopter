@@ -220,7 +220,7 @@ $ ./startmavros
 ```
 These three terminals launch the sandislad world with the iris quadcopter, the SITL (both communication, telemetry, console and map) and the mavros communcations.
 If everyhting are launched succesfuly then you will have topics both from the ZED stereo camera and from the DVS (only one topic that gives events). The DVS has not a body. You will be watching only its field of view.
-While the simulator is running you open a terminal and run the commands below:
+While the simulator is running you open a terminal and run the commands below that can start the trained NN for coastline detection running:
 ```
 $ cd ~/csl_uav_simulator_ws/src/csl_uav_simulator/scripts
 $ ./start_coast_det.sh
