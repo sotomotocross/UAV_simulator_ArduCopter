@@ -118,9 +118,10 @@ After the the workspace is ready, clone the repository:
 ```
 $ cd ~/csl_uav_simulator_ws/src
 $ git clone https://github.com/sotomotocross/csl_uav_simulator.git
-$ cd csl_uav_simulator/
+$ cd ../
 $ git clone https://github.com/HBPNeurorobotics/gazebo_dvs_plugin.git
 $ git clone https://github.com/uzh-rpg/rpg_dvs_ros.git
+$ git clone https://github.com/catkin/catkin_simple.git
 ```
 Move the ardupilot_gazebo package to the home directory and build it there (cross-check with the Using Gazebo Simulator with SITL documentation given above):
 ```
