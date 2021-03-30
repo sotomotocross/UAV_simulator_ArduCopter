@@ -54,7 +54,7 @@ $ pip install -U scipy matplotlib pillow
 $ pip install -U imutils h5py==2.10.0 requests progressbar2
 $ pip install cython
 $ pip install scikit-learn scikit-build scikit-image
-$ pip install  opencv-contrib-python==4.4.0.46
+$ pip install opencv-contrib-python==4.4.0.46
 $ pip install tensorflow-gpu==1.14.0
 $ pip install keras==2.2.5
 $ pip install opencv-python==4.4.0.42
