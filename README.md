@@ -49,9 +49,9 @@ $ pip install keras-segmentation
 ```
 Now you have to be inside the virtual environment so you have to install all the pip dependencies:
 ```
-$ pip install -U numpy
-$ pip install -U scipy matplotlib pillow
-$ pip install -U imutils h5py==2.10.0 requests progressbar2
+$ pip install numpy
+$ pip install scipy matplotlib pillow
+$ pip install imutils h5py==2.10.0 requests progressbar2
 $ pip install cython
 $ pip install scikit-learn scikit-build scikit-image
 $ pip install opencv-contrib-python==4.4.0.46
@@ -151,9 +151,9 @@ After installing ardupilot_gazebo and testing it continue with the setup of the 
 ```
 $ mkdir -p ~/ecatkins_ws/src
 $ cd ~/ecatkin_ws
-$ pip3 install -U numpy
-$ pip3 install -U scipy matplotlib pillow
-$ pip3 install -U imutils h5py==2.10.0 requests progressbar2
+$ pip3 install numpy
+$ pip3 install scipy matplotlib pillow
+$ pip3 install imutils h5py==2.10.0 requests progressbar2
 $ pip3 install cython
 $ pip3 install scikit-learn scikit-build scikit-image
 $ pip3 install opencv-contrib-python==4.4.0.46
