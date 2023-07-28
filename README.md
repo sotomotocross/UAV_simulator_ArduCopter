@@ -10,7 +10,6 @@ UAV simulator featuring ArduCopter and MAVROS integration
 * [Usage](#usage)
 
 
-
 ## Introduction
 This Github repo features a UAV simulator integrating ArduCopter and MAVROS communication.
 It is developed on Ubuntu 18.04 LTS using ROS Melodic (https://wiki.ros.org/melodic) and Gazebo 9.
@@ -88,28 +87,6 @@ $ export GAZEBO_MODEL_PATH=~/ardupilot_gazebo/models:${GAZEBO_MODEL_PATH}
 $ export GAZEBO_MODEL_PATH=~/ardupilot_gazebo/models_gazebo:${GAZEBO_MODEL_PATH}
 $ export GAZEBO_RESOURCE_PATH=~/ardupilot_gazebo/worlds:${GAZEBO_RESOURCE_PATH}
 $ export GAZEBO_PLUGIN_PATH=~/ardupilot_gazebo/build:${GAZEBO_PLUGIN_PATH}
-```
-After installing ardupilot_gazebo and testing it continue with the setup of the ecatkin_ws:
-```
-$ mkdir -p ~/ecatkins_ws/src
-$ cd ~/ecatkin_ws
-$ pip3 install numpy
-$ pip3 install scipy matplotlib pillow
-$ pip3 install imutils h5py==2.10.0 requests progressbar2
-$ pip3 install cython
-$ pip3 install scikit-learn scikit-build scikit-image
-$ pip3 install opencv-contrib-python==4.4.0.46
-$ pip3 install opencv-python==4.4.0.42
-$ pip3 install rospkg empy
-$ catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6 -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.6m.so
-```
-Now you can move all the ecatkin_ws content from the repo to the src directory of the ecatkin_ws you just created and build.
-Then you execute the commands below:
-```
-$ cd ~/ecatkin_ws
-$ rosdep install --from-paths src --ignore-src -r -y
-$ catkin_make -DPYTHON_EXECUTABLE=/usr/bin/python3 -DPYTHON_INCLUDE_DIR=/usr/include/python3.6 -DPYTHON_LIBRARY=/usr/lib/x86_64-linux-gnu/libpython3.6m.so
-$ source devel/setup.bash
 ```
 Go to the rpg_dvs_ros github repo (https://github.com/uzh-rpg/rpg_dvs_ros) and install all the dependencies according to the documentation of the package.
 Since the catkin_make of the ecatkin_ws is succesful you can build the simulator:
