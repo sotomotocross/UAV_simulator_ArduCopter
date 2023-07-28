@@ -27,7 +27,7 @@
 #include <mavlink/v2.0/ardupilotmega/ardupilotmega.hpp>
 #include <mavlink/v2.0/ASLUAV/ASLUAV.hpp>
 #include <mavlink/v2.0/all/all.hpp>
-#include <mavlink/v2.0/autoquad/autoquad.hpp>
+#include <mavlink/v2.0/development/development.hpp>
 #include <mavlink/v2.0/icarous/icarous.hpp>
 #include <mavlink/v2.0/matrixpilot/matrixpilot.hpp>
 #include <mavlink/v2.0/paparazzi/paparazzi.hpp>
