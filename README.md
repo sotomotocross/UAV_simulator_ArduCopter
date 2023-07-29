@@ -1,4 +1,4 @@
-# UAV simulator with ArduCopterand MAVROS
+# UAV simulator with ArduCopter and MAVROS
 Quadrotor UAV simulator featuring ArduCopter and MAVROS integration
 
 
