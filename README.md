@@ -26,8 +26,7 @@ The current package is a combination of the basic ardupilot_gazebo packages:
 1. https://github.com/khancyr/ardupilot_gazebo
 2. https://github.com/SwiftGust/ardupilot_gazebo
 
-with some new and modified models according to the simulator's use.
-We recommend you to study the Using Gazebo Simulator with SITL tutorial and then installing the present ardupilot_gazebo package in this repository.
+with some new and modified models according to the simulator's use. Recommendation to study the Using Gazebo Simulator with SITL tutorial and then installing the present ardupilot_gazebo package in this repository.
 
 ### vrx
 This package is the home to the modified source code and software documentation for the VRX Simulation and the VRX Challenge (https://github.com/osrf/vrx).
@@ -51,24 +50,21 @@ Packages created for a 2D navigation demo of the quadcopter featuring obstacle a
 Create a catkin workspace with the following commands: 
 ```
 $ cd ~
-$ mkdir -p csl_uav_simulator_ws/src
-$ cd csl_uav_simulator_ws
+$ mkdir -p ~/catkin_ws/src
+$ cd ~/catkin_ws
 $ catkin_make
 ```
 After the the workspace is ready, clone the repository:
 ```
-$ cd ~/csl_uav_simulator_ws/src
-$ git clone https://github.com/sotomotocross/csl_uav_simulator.git
-$ cd ../
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/sotomotocross/UAV_simulator_ArduCopter.git
 $ git clone https://github.com/HBPNeurorobotics/gazebo_dvs_plugin.git
 $ git clone https://github.com/uzh-rpg/rpg_dvs_ros.git
 $ git clone https://github.com/catkin/catkin_simple.git
 ```
-Move the ardupilot_gazebo package to the home directory and build it there (cross-check with the Using Gazebo Simulator with SITL documentation given above):
+Build the ardupilot_gazebo package (cross-check with the Using Gazebo Simulator with SITL documentation given above):
 ```
-$ cd csl_uav_simulator/
-$ mv ardupilot_gazebo/ /home/$USER/
-$ cd ~/ardupilot_gazebo/
+$ cd ~/catkin_ws/src/ardupilot_gazebo
 $ mkdir build
 $ cd build
 $ cmake ..
@@ -83,21 +79,21 @@ Copy & Paste Following at the end of .bashrc file
 ```
 $ source /usr/share/gazebo/setup.sh
 
-$ export GAZEBO_MODEL_PATH=~/ardupilot_gazebo/models:${GAZEBO_MODEL_PATH}
-$ export GAZEBO_MODEL_PATH=~/ardupilot_gazebo/models_gazebo:${GAZEBO_MODEL_PATH}
-$ export GAZEBO_RESOURCE_PATH=~/ardupilot_gazebo/worlds:${GAZEBO_RESOURCE_PATH}
-$ export GAZEBO_PLUGIN_PATH=~/ardupilot_gazebo/build:${GAZEBO_PLUGIN_PATH}
+$ export GAZEBO_MODEL_PATH=~/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models:${GAZEBO_MODEL_PATH}
+$ export GAZEBO_MODEL_PATH=~/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models_gazebo:${GAZEBO_MODEL_PATH}
+$ export GAZEBO_RESOURCE_PATH=~/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/worlds:${GAZEBO_RESOURCE_PATH}
+$ export GAZEBO_PLUGIN_PATH=~/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/build:${GAZEBO_PLUGIN_PATH}
 ```
 Go to the rpg_dvs_ros github repo (https://github.com/uzh-rpg/rpg_dvs_ros) and install all the dependencies according to the documentation of the package.
 Since the catkin_make of the ecatkin_ws is succesful you can build the simulator:
 ```
-$ cd ~/csl_uav_simulator_ws
+$ cd ~/catkin_ws
 $ rosdep install --from-paths src --ignore-src -r -y
 $ catkin_make
 $ source devel/setup.bash
-$ cd src/csl_uav_simulator_ws/src/csl_uav_simulator/mavros/mavros/scripts
+$ cd ~/catkin_ws/src/UAV_simulator_ArduCopter/mavros/mavros/scripts
 $ ./install_geographiclib_datasets.sh
-$ cd ~/cs_uav_simulator_ws
+$ cd ~/catkin_ws
 ```
 Install is complete
 
@@ -110,7 +106,7 @@ File: iris_coastline.launch
 Inside the iris_coastline package.
 In the line 86 you change the path of the model.sdf launched inside the script
 ```
-<arg name="sdf_robot_file" default="/home/$USER/ardupilot_gazebo/models/iris_with_ardupilot_and_zed_stereocamera/model.sdf" />
+<arg name="sdf_robot_file" default="/home/$USER$/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models/iris_with_ardupilot_and_zed_stereocamera/model.sdf" />
 ```
 
 ### Second
@@ -118,39 +114,36 @@ File spawn_drone.launch
 Inside the iris_gazebo package.
 In the line 13 change the path for the model.sdf file launched inside the script.
 ```
-<arg name="sdf_robot_file" default="/home/sotiris/ardupilot_gazebo/models/iris_with_lidar/model.sdf" /> 
+<arg name="sdf_robot_file" default="/home/$USER$/catkin_ws/src/UAV_simulator_ArduCopter/ardupilot_gazebo/models/iris_with_lidar/model.sdf" /> 
 ```
 
 ## Usage
 
 ### Initial launch of the world
 ```
-$ cd ~/csl_uav_simulator_ws/src/csl_uav_simulator/scripts
-$ ./startgz.sh
+$ cd ~/catkin_ws/
+$ source devel/setup.bash
+$ roslaunch iris_coastline iris_coastline.launch
 ```
 Open a second terminal and launch SITL through the scripts file in the repo:
 ```
-$ cd ~/csl_uav_simulator_ws/src/csl_uav_simulator/scripts
-$ ./startsitl.sh
+$ cd ~/ardupilot/ArduCopter/
+$ sim_vehicle.py --mavproxy-args="--streamrate=30" --console --map -v ArduCopter -f gazebo-iris
 ```
 Open a third terminal and launch mavros:
 ```
-$ cd ~/csl_uav_simulator_ws/src/csl_uav_simulator/scripts
-$ ./startmavros
+$ cd ~/catkin_ws
+$ source devel/setup.bash
+$ roslaunch mavros apm.launch
 ```
 These three terminals launch the sandislad world with the iris quadcopter, the SITL (both communication, telemetry, console and map) and the mavros communcations.
 If everyhting are launched succesfuly then you will have topics both from the ZED stereo camera and from the DVS (only one topic that gives events). The DVS has not a body. You will be watching only its field of view.
-While the simulator is running you open a terminal and run the commands below that can start the trained NN for coastline detection running:
-```
-$ cd ~/csl_uav_simulator_ws/src/csl_uav_simulator/scripts
-$ ./start_coast_det.sh
-```
 
 ### Iris quadcopter teleoperation
 You will need a joystick to launch this package (ideally a Logitech Wireless F710).
 If you have a joystick (if it's not a logitech you have to configure a yaml file for the axes and button mapping), having launched the three terminals above you open a fourth terminal and run the commands below:
 ```
-$ cd ~/csl_uav_simulator_ws
+$ cd ~/catkin_ws
 $ source devel/setup.bash
 $ roslaunch mavros_extras teleop.launch teleop_args:=-vel
 ```
@@ -165,13 +158,13 @@ when the quadcopter has been taken off to 3 meters and the teleoperation package
 ### Obstacle avoidance (2D Navigation)
 Open a terminal and launch an empty world with iris_gazebo
 ```
-$ cd ~/csl_uav_simulator_ws
+$ cd ~/catkin_ws
 $ source devel/setup.bash
 $ roslaunch iris_gazebo iris_empty_world.launch
 ```
 open a second terminal and spawn the quadcopter equipped with a Hokuyo Lidar:
 ```
-$ cd ~/csl_uav_simulator_ws
+$ cd ~/catkin_ws
 $ source devel/setup.bash
 $ roslaunch iris_gazebo spawn_drone.launch
 ```
@@ -182,19 +175,19 @@ $ ../Tools/autotest/sim_vehicle.py --map --console
 ```
 open a fourth terminal and launch mavros:
 ```
-$ cd ~/csl_uav_simulator_ws
+$ cd ~/catkin_ws
 $ source devel/setup.bash
 $ roslaunch mavros apm.launch
 ```
 open a fifth terminal and launch the move_base package:
 ```
-$ cd ~/csl_uav_simulator_ws
+$ cd ~/catkin_ws
 $ source devel/setup.bash
 $ roslaunch iris_navigation move_base.launch
 ```
 open a sixth terminal and begin navigation:
 ```
-$ cd ~/csl_uav_simulator_ws
+$ cd ~/catkin_ws
 $ source devel/setup.bash
 $ rosrun iris_navigations cmd_vel_to_mavros.py
 ```
