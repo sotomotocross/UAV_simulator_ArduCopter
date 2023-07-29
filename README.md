@@ -1,4 +1,4 @@
-# csl_uav_simulator
+# UAV simulator with ArduCopterand MAVROS
 Quadrotor UAV simulator featuring ArduCopter and MAVROS integration
 
 
